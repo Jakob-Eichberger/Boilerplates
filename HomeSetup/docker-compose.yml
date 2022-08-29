@@ -38,7 +38,7 @@ services:
       - '/:/host:ro,rslave'
   
   cadvisor:
-    image: 'gcr.io/cadvisor/cadvisor'
+    image: 'zcube/cadvisor'
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro
@@ -57,3 +57,16 @@ services:
     ports:
       - '9233:9233'
     restart: unless-stopped
+    
+  pihole_exporter:
+    image: ekofr/pihole-exporter
+    container_name: pihole_exporter
+    expose:
+      - 9617
+    environment:
+      PIHOLE_HOSTNAME: 192.168.0.10 
+      PIHOLE_PORT: 53
+      PIHOLE_PASSWORD: 'admin'
+      INTERVAL: 30s
+      PORT: 9617
+    restart: always
