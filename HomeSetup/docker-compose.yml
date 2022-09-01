@@ -70,3 +70,10 @@ services:
       INTERVAL: 30s
       PORT: 9617
     restart: always
+
+  z21_exporter:
+    image: jakobeichberger/z21exporter:latest
+    container_name: z21_exporter
+    expose:
+      - 9101
+    restart: always
